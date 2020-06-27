@@ -1,0 +1,15 @@
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\appsettings.Development.json
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\appsettings.json
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\Properties\launchSettings.json
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\WebAPIRestCore20.deps.json
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\WebAPIRestCore20.runtimeconfig.json
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\WebAPIRestCore20.runtimeconfig.dev.json
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\WebAPIRestCore20.dll
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\bin\Debug\netcoreapp2.0\WebAPIRestCore20.pdb
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.csprojAssemblyReference.cache
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.AssemblyInfoInputs.cache
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.AssemblyInfo.cs
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.csproj.CoreCompileInputs.cache
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.dll
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.pdb
+C:\Ricardo\Estudo\WebAPI\DOT.NETCore\WebAPIRestCore20\WebAPIRestCore20\WebAPIRestCore20\obj\Debug\netcoreapp2.0\WebAPIRestCore20.genruntimeconfig.cache
