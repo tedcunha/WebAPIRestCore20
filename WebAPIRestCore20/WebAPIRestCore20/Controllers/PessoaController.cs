@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPIRestCore20.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class PessoaController : Controller
     {
         // GET api/values
         [HttpGet]
