@@ -16,7 +16,7 @@ namespace WebAPIRestCore20.Model.Context
         {
         }
 
-        public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<Pessoa> persons { get; set; }
 
     }
 }

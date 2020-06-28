@@ -1,64 +1,88 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using WebAPIRestCore20.Model;
+using WebAPIRestCore20.Model.Context;
 
 namespace WebAPIRestCore20.Services.Implementations
 {
     public class PessoaServiceImplem : IPessoaService
     {
-        private volatile int count;
+        private readonly MySqlContext _mySqlContext;
+
+        public PessoaServiceImplem(MySqlContext mySqlContext)
+        {
+            _mySqlContext = mySqlContext;
+        }
 
         public Pessoa Create(Pessoa pessoa)
         {
+            try
+            {
+                _mySqlContext.Add(pessoa);
+                _mySqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return pessoa;
         }
 
         public void Delete(int Id)
         {
+            var retorno = _mySqlContext.persons.SingleOrDefault(p => p.Id == Id);
+            try
+            {
+                if (retorno != null)
+                {
+                    _mySqlContext.persons.Remove(retorno);
+                    _mySqlContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Pessoa> FindAll()
         {
-            List<Pessoa> Pessoas = new List<Pessoa>();
-            for (int i = 0; i < 8; i++)
-            {
-                Pessoa pessoa = MockPessoa(i);
-                Pessoas.Add(pessoa);
-            }
-
-            return Pessoas;
+            return _mySqlContext.persons.ToList();
         }
 
         public Pessoa FindByID(int Id)
         {
-            return new Pessoa {Id = Id,
-                               Nome = "Ricardo",
-                               SobreNome = "Cunha",
-                               Endereco = "Rua Tiradentre, 1837 - Bloco 11 / Apto 71. - Sta Terezinha - São Bernardo do Campo - SP - Cep 09781-220",
-                               Genero = "Masculino"
-            };
+            return _mySqlContext.persons.SingleOrDefault(p => p.Id == Id);
         }
 
         public Pessoa Update(Pessoa pessoa)
         {
+            if (!Exist(pessoa.Id))
+            {
+                return new Pessoa();
+            }
+
+            var retorno = _mySqlContext.persons.SingleOrDefault(p => p.Id == pessoa.Id);
+            
+            try
+            {
+                _mySqlContext.Entry(retorno).CurrentValues.SetValues(pessoa);
+                _mySqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return pessoa;
         }
 
-        private Pessoa MockPessoa(int i)
+        private bool Exist(int? id)
         {
-            return new Pessoa
-            {
-                Id = IncrementAndGet(),
-                Nome = $"Nome Pessoa {i}",
-                SobreNome = $"Sobrenome Pessoa {i}",
-                Endereco = $"Endereço Pessoa {i}",
-                Genero = $"Genero Pessoa {i}"
-            };
-        }
-
-        private int IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
+            return _mySqlContext.persons.Any(p => p.Id == id);
         }
     }
 }
