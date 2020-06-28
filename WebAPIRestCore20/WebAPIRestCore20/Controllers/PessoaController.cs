@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Business;
 
@@ -13,25 +9,25 @@ namespace WebAPIRestCore20.Controllers
     public class PessoaController : Controller
     {
 
-        private readonly IPessoaBusiness _pessoaService;
+        private readonly IPessoaBusiness _pessoaBusiness;
 
-        public PessoaController(IPessoaBusiness pessoaService)
+        public PessoaController(IPessoaBusiness pessoaBusiness)
         {
-            _pessoaService = pessoaService;
+            _pessoaBusiness = pessoaBusiness;
         }
 
         // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_pessoaService.FindAll());
+            return Ok(_pessoaBusiness.FindAll());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var pessoa = _pessoaService.FindByID(id);
+            var pessoa = _pessoaBusiness.FindByID(id);
             if (pessoa == null)
             {
                 return NotFound();
@@ -47,7 +43,7 @@ namespace WebAPIRestCore20.Controllers
             {
                 return BadRequest();
             }
-            return new ObjectResult(_pessoaService.Create(pessoa));
+            return new ObjectResult(_pessoaBusiness.Create(pessoa));
         }
 
         // PUT api/values/5
@@ -58,14 +54,14 @@ namespace WebAPIRestCore20.Controllers
             {
                 return BadRequest();
             }
-            return new ObjectResult(_pessoaService.Update(pessoa));
+            return new ObjectResult(_pessoaBusiness.Update(pessoa));
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _pessoaService.Delete(id);
+            _pessoaBusiness.Delete(id);
             return NoContent();
         }
     }
