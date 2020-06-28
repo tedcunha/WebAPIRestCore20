@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "08fVDZjrvqf2lyTT5WZp5A9RZOPGlPQaxQWD7egRhFQpnhq51xHAMJt8SUZj5RzRzWuPEWLeAV+dw25Ux7pF5w==",
+  "dgSpecHash": "xJrHT2DX+dMIYP1u90+FS7bj/TE/yIlDYlAwL5M41p2pu7Z7PyZNrT7f6qt+NYoZIi5DvJNypgVWDVo4wE2CxA==",
   "success": true,
   "projectFilePath": "C:\\Ricardo\\Estudo\\WebAPI\\DOT.NETCore\\WebAPIRestCore20\\WebAPIRestCore20\\WebAPIRestCore20\\WebAPIRestCore20.csproj",
   "expectedPackageFiles": [
@@ -67,6 +67,7 @@
     "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.viewcompilation\\2.0.4\\microsoft.aspnetcore.mvc.razor.viewcompilation.2.0.4.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.mvc.razorpages\\2.0.4\\microsoft.aspnetcore.mvc.razorpages.2.0.4.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.mvc.taghelpers\\2.0.4\\microsoft.aspnetcore.mvc.taghelpers.2.0.4.nupkg.sha512",
+    "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\2.2.0\\microsoft.aspnetcore.mvc.versioning.2.2.0.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.mvc.viewfeatures\\2.0.4\\microsoft.aspnetcore.mvc.viewfeatures.2.0.4.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.nodeservices\\2.0.4\\microsoft.aspnetcore.nodeservices.2.0.4.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\microsoft.aspnetcore.owin\\2.0.3\\microsoft.aspnetcore.owin.2.0.3.nupkg.sha512",

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPIRestCore20.Model;
 
-namespace WebAPIRestCore20.Services
+namespace WebAPIRestCore20.Business
 {
-    public interface IPessoaService
+    public interface IPessoaBusiness
     {
         Pessoa Create(Pessoa pessoa);
         Pessoa FindByID(int Id);

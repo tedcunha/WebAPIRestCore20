@@ -5,13 +5,13 @@ using System.Threading;
 using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Model.Context;
 
-namespace WebAPIRestCore20.Services.Implementations
+namespace WebAPIRestCore20.Business.Implementations
 {
-    public class PessoaServiceImplem : IPessoaService
+    public class PessoaBusinessImplem : IPessoaBusiness
     {
         private readonly MySqlContext _mySqlContext;
 
-        public PessoaServiceImplem(MySqlContext mySqlContext)
+        public PessoaBusinessImplem(MySqlContext mySqlContext)
         {
             _mySqlContext = mySqlContext;
         }

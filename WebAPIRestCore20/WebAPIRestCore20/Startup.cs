@@ -10,8 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebAPIRestCore20.Model.Context;
-using WebAPIRestCore20.Services;
-using WebAPIRestCore20.Services.Implementations;
+using WebAPIRestCore20.Business;
+using WebAPIRestCore20.Business.Implementations;
 
 namespace WebAPIRestCore20
 {
@@ -32,7 +32,9 @@ namespace WebAPIRestCore20
 
             services.AddMvc();
 
-            services.AddScoped<IPessoaService, PessoaServiceImplem>();
+            services.AddApiVersioning();
+
+            services.AddScoped<IPessoaBusiness, PessoaBusinessImplem>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

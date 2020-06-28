@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebAPIRestCore20.Model;
-using WebAPIRestCore20.Services;
+using WebAPIRestCore20.Business;
 
 namespace WebAPIRestCore20.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class PessoaController : Controller
     {
 
-        private readonly IPessoaService _pessoaService;
+        private readonly IPessoaBusiness _pessoaService;
 
-        public PessoaController(IPessoaService pessoaService)
+        public PessoaController(IPessoaBusiness pessoaService)
         {
             _pessoaService = pessoaService;
         }
