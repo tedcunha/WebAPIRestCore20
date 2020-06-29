@@ -13,5 +13,6 @@ namespace WebAPIRestCore20.Repository
         List<Pessoa> FindAll();
         Pessoa Update(Pessoa pessoa);
         void Delete(int Id);
+        bool Exist(int? id);
     }
 }

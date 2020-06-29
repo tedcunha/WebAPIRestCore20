@@ -66,7 +66,6 @@ namespace WebAPIRestCore20.Repository.Implementations
             }
 
             var retorno = _mySqlContext.persons.SingleOrDefault(p => p.Id == pessoa.Id);
-            
             try
             {
                 _mySqlContext.Entry(retorno).CurrentValues.SetValues(pessoa);
@@ -79,8 +78,7 @@ namespace WebAPIRestCore20.Repository.Implementations
 
             return pessoa;
         }
-
-        private bool Exist(int? id)
+        public bool Exist(int? id)
         {
             return _mySqlContext.persons.Any(p => p.Id == id);
         }

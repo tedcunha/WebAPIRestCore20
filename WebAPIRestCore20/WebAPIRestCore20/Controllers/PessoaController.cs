@@ -47,8 +47,8 @@ namespace WebAPIRestCore20.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Pessoa pessoa)
+        [HttpPut]
+        public IActionResult Put([FromBody] Pessoa pessoa)
         {
             if (pessoa == null)
             {

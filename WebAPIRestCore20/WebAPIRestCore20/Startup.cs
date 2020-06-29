@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using WebAPIRestCore20.Model.Context;
 using WebAPIRestCore20.Business;
 using WebAPIRestCore20.Business.Implementations;
+using WebAPIRestCore20.Repository;
+using WebAPIRestCore20.Repository.Implementations;
 
 namespace WebAPIRestCore20
 {
@@ -28,7 +30,11 @@ namespace WebAPIRestCore20
 
             services.AddApiVersioning();
 
+            // Bussines
             services.AddScoped<IPessoaBusiness, PessoaBusinessImplem>();
+
+            //Repository
+            services.AddScoped<IPessoaRepository, PessoaRepositoryImplem>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
