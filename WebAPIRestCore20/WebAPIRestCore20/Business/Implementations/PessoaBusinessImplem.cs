@@ -10,7 +10,7 @@ namespace WebAPIRestCore20.Business.Implementations
 {
     public class PessoaBusinessImplem : IPessoaBusiness
     {
-        private readonly MySqlContext _mySqlContext;
+
         private readonly IPessoaRepository _pessoaRepository;
 
         public PessoaBusinessImplem(IPessoaRepository pessoaRepository)

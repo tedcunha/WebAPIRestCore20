@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xJrHT2DX+dMIYP1u90+FS7bj/TE/yIlDYlAwL5M41p2pu7Z7PyZNrT7f6qt+NYoZIi5DvJNypgVWDVo4wE2CxA==",
+  "dgSpecHash": "Pv4cIEqQzX9HaR4FWLx0ktwNMJT0xM649VO8HHf2uhgbvWAfcw+yD9m93fRwvhr7UpHzcP+AoOiRwiRGf9sDyg==",
   "success": true,
   "projectFilePath": "C:\\Ricardo\\Estudo\\WebAPI\\DOT.NETCore\\WebAPIRestCore20\\WebAPIRestCore20\\WebAPIRestCore20\\WebAPIRestCore20.csproj",
   "expectedPackageFiles": [
@@ -207,6 +207,10 @@
     "C:\\Users\\Ricardo\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3.v110_xp\\1.1.7\\sqlitepclraw.lib.e_sqlite3.v110_xp.1.1.7.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3.netstandard11\\1.1.7\\sqlitepclraw.provider.e_sqlite3.netstandard11.1.1.7.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\stackexchange.redis.strongname\\1.2.4\\stackexchange.redis.strongname.1.2.4.nupkg.sha512",
+    "C:\\Users\\Ricardo\\.nuget\\packages\\swashbuckle.aspnetcore\\2.4.0\\swashbuckle.aspnetcore.2.4.0.nupkg.sha512",
+    "C:\\Users\\Ricardo\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\2.4.0\\swashbuckle.aspnetcore.swagger.2.4.0.nupkg.sha512",
+    "C:\\Users\\Ricardo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\2.4.0\\swashbuckle.aspnetcore.swaggergen.2.4.0.nupkg.sha512",
+    "C:\\Users\\Ricardo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\2.4.0\\swashbuckle.aspnetcore.swaggerui.2.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\Ricardo\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

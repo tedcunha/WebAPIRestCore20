@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Business;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Collections.Generic;
 
 namespace WebAPIRestCore20.Controllers
 {
@@ -16,15 +18,21 @@ namespace WebAPIRestCore20.Controllers
             _pessoaBusiness = pessoaBusiness;
         }
 
-        // GET api/values
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<Pessoa>))]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
         public IActionResult Get()
         {
             return Ok(_pessoaBusiness.FindAll());
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(Pessoa))]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
         public IActionResult Get(int id)
         {
             var pessoa = _pessoaBusiness.FindByID(id);
@@ -35,8 +43,10 @@ namespace WebAPIRestCore20.Controllers
             return Ok(pessoa);
         }
 
-        // POST api/values
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(Pessoa))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
         public IActionResult Post([FromBody] Pessoa pessoa)
         {
             if (pessoa == null)
@@ -46,8 +56,10 @@ namespace WebAPIRestCore20.Controllers
             return new ObjectResult(_pessoaBusiness.Create(pessoa));
         }
 
-        // PUT api/values/5
         [HttpPut]
+        [SwaggerResponse((202), Type = typeof(Pessoa))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
         public IActionResult Put([FromBody] Pessoa pessoa)
         {
             if (pessoa == null)
@@ -57,8 +69,10 @@ namespace WebAPIRestCore20.Controllers
             return new ObjectResult(_pessoaBusiness.Update(pessoa));
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
         public IActionResult Delete(int id)
         {
             _pessoaBusiness.Delete(id);
