@@ -5,50 +5,49 @@ using System.Threading;
 using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Model.Context;
 using WebAPIRestCore20.Repository;
+using WebAPIRestCore20.Repository.Generic;
 
 namespace WebAPIRestCore20.Business.Implementations
 {
     public class PessoaBusinessImplem : IPessoaBusiness
     {
+        private readonly IRepository<Pessoa> _repository;
 
-        private readonly IPessoaRepository _pessoaRepository;
-
-        public PessoaBusinessImplem(IPessoaRepository pessoaRepository)
+        public PessoaBusinessImplem(IRepository<Pessoa> repository)
         {
-            _pessoaRepository = pessoaRepository;
+            _repository = repository;
         }
 
         public Pessoa Create(Pessoa pessoa)
         {
-            return _pessoaRepository.Create(pessoa);
+            return _repository.Create(pessoa);
         }
 
         public void Delete(int Id)
         {
             try
             {
-                _pessoaRepository.Delete(Id);
+                _repository.Delete(Id);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
         public List<Pessoa> FindAll()
         {
-            return _pessoaRepository.FindAll();
+            return _repository.FindAll();
         }
 
         public Pessoa FindByID(int Id)
         {
-            return _pessoaRepository.FindByID(Id);
+            return _repository.FindByID(Id);
         }
 
         public Pessoa Update(Pessoa pessoa)
         {
-            return _pessoaRepository.Update(pessoa);
+            return _repository.Update(pessoa);
         }
     }
 }
