@@ -11,6 +11,6 @@ namespace WebAPIRestCore20.Model.Base
     //[DataContract]
     public class BaseEntity
     {
-        public int Id { get; set; }
+        public long? Id { get; set; }
     }
 }

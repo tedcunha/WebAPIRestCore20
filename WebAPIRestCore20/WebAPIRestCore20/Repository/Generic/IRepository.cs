@@ -12,7 +12,7 @@ namespace WebAPIRestCore20.Repository.Generic
         T FindByID(long Id);
         List<T> FindAll();
         T Update(T item);
-        void Delete(int Id);
+        void Delete(long Id);
         bool Exist(long? id);
     }
 }

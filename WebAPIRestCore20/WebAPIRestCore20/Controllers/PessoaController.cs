@@ -3,6 +3,7 @@ using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Business;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
+using WebAPIRestCore20.Data.VO;
 
 namespace WebAPIRestCore20.Controllers
 {
@@ -33,7 +34,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
-        public IActionResult Get(int id)
+        public IActionResult Get(long id)
         {
             var pessoa = _pessoaBusiness.FindByID(id);
             if (pessoa == null)
@@ -47,7 +48,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((201), Type = typeof(Pessoa))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
-        public IActionResult Post([FromBody] Pessoa pessoa)
+        public IActionResult Post([FromBody] PessoaVO pessoa)
         {
             if (pessoa == null)
             {
@@ -60,7 +61,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((202), Type = typeof(Pessoa))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
-        public IActionResult Put([FromBody] Pessoa pessoa)
+        public IActionResult Put([FromBody] PessoaVO pessoa)
         {
             if (pessoa == null)
             {
@@ -73,7 +74,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
             _pessoaBusiness.Delete(id);
             return NoContent();

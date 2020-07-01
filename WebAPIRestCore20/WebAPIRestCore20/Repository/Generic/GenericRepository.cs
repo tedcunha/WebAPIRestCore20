@@ -34,7 +34,7 @@ namespace WebAPIRestCore20.Repository.Generic
             return item;
         }
 
-        public void Delete(int Id)
+        public void Delete(long Id)
         {
             var retorno = dataset.SingleOrDefault(p => p.Id == Id);
             try

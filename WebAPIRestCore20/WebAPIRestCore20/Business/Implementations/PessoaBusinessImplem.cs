@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using WebAPIRestCore20.Data.Converters;
+using WebAPIRestCore20.Data.VO;
 using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Model.Context;
 using WebAPIRestCore20.Repository;
@@ -13,17 +15,22 @@ namespace WebAPIRestCore20.Business.Implementations
     {
         private readonly IRepository<Pessoa> _repository;
 
+        private readonly PessoaConverter _converter;
         public PessoaBusinessImplem(IRepository<Pessoa> repository)
         {
             _repository = repository;
+            _converter = new PessoaConverter();
         }
 
-        public Pessoa Create(Pessoa pessoa)
+        public PessoaVO Create(PessoaVO pessoa)
         {
-            return _repository.Create(pessoa);
+            pessoa.QuidID = Guid.NewGuid().ToString();
+            var pessoaEntity = _converter.Parse(pessoa);
+            pessoaEntity = _repository.Create(pessoaEntity);
+            return _converter.Parse(pessoaEntity);
         }
 
-        public void Delete(int Id)
+        public void Delete(long Id)
         {
             try
             {
@@ -35,19 +42,21 @@ namespace WebAPIRestCore20.Business.Implementations
             }
         }
 
-        public List<Pessoa> FindAll()
+        public List<PessoaVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.ParseList(_repository.FindAll());
         }
 
-        public Pessoa FindByID(int Id)
+        public PessoaVO FindByID(long Id)
         {
-            return _repository.FindByID(Id);
+            return _converter.Parse(_repository.FindByID(Id));
         }
 
-        public Pessoa Update(Pessoa pessoa)
+        public PessoaVO Update(PessoaVO pessoa)
         {
-            return _repository.Update(pessoa);
+            var pessoaEntity = _converter.Parse(pessoa);
+            pessoaEntity = _repository.Update(pessoaEntity);
+            return _converter.Parse(pessoaEntity);
         }
     }
 }

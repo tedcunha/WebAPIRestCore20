@@ -10,6 +10,7 @@ namespace WebAPIRestCore20.Model
 {
     public class Livro : BaseEntity
     {
+        public string QuidID { get; set; }
         public string Titulo { get; set; }
         public string Autor { get; set; }
         public decimal Preco { get; set; }

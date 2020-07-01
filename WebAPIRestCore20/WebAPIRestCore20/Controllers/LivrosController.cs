@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebAPIRestCore20.Business;
+using WebAPIRestCore20.Data.VO;
 using WebAPIRestCore20.Model;
 
 namespace WebAPIRestCore20.Controllers
@@ -27,13 +28,18 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(long id)
         {
-            return Ok();
+            var livro = _livrosBusiness.FindByID(id);
+            if (livro == null)
+            {
+                return NotFound();
+            }
+            return Ok(livro);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Livro livro)
+        public IActionResult Post([FromBody] LivroVO livro)
         {
             if (livro == null)
             {
@@ -43,14 +49,19 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Livro livro)
+        public IActionResult Put([FromBody] LivroVO livro)
         {
-            return new ObjectResult(livro);
+            if (livro == null)
+            {
+                return BadRequest();
+            }
+            return new ObjectResult(_livrosBusiness.Update(livro));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
+            _livrosBusiness.Delete(id);
             return NoContent();
         }
     }

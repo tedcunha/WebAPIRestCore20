@@ -8,6 +8,7 @@ namespace WebAPIRestCore20.Model
 {
     public class Pessoa : BaseEntity
     {
+        public string QuidID { get; set; }
         public string Nome { get; set; }
         public string SobreNome { get; set; }
         public string Endereco { get; set; }

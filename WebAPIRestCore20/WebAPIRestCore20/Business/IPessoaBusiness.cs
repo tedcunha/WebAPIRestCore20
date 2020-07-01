@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPIRestCore20.Data.VO;
 using WebAPIRestCore20.Model;
 
 namespace WebAPIRestCore20.Business
 {
     public interface IPessoaBusiness
     {
-        Pessoa Create(Pessoa pessoa);
-        Pessoa FindByID(int Id);
-        List<Pessoa> FindAll();
-        Pessoa Update(Pessoa pessoa);
-        void Delete(int Id);
+        PessoaVO Create(PessoaVO pessoa);
+        PessoaVO FindByID(long Id);
+        List<PessoaVO> FindAll();
+        PessoaVO Update(PessoaVO pessoa);
+        void Delete(long Id);
     }
 }
