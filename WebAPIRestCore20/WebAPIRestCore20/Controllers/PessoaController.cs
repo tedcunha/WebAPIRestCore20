@@ -4,6 +4,7 @@ using WebAPIRestCore20.Business;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 using WebAPIRestCore20.Data.VO;
+using Tapioca.HATEOAS;
 
 namespace WebAPIRestCore20.Controllers
 {
@@ -24,6 +25,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_pessoaBusiness.FindAll());
@@ -34,6 +36,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var pessoa = _pessoaBusiness.FindByID(id);
@@ -48,6 +51,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((201), Type = typeof(Pessoa))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PessoaVO pessoa)
         {
             if (pessoa == null)
@@ -61,6 +65,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((202), Type = typeof(Pessoa))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PessoaVO pessoa)
         {
             if (pessoa == null)
@@ -74,6 +79,7 @@ namespace WebAPIRestCore20.Controllers
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(long id)
         {
             _pessoaBusiness.Delete(id);

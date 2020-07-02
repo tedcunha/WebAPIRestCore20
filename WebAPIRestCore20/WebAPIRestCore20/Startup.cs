@@ -9,6 +9,9 @@ using WebAPIRestCore20.Business.Implementations;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Rewrite;
 using WebAPIRestCore20.Repository.Generic;
+using Microsoft.Net.Http.Headers;
+using Tapioca.HATEOAS;
+using WebAPIRestCore20.HyperMidia;
 
 namespace WebAPIRestCore20
 {
@@ -27,7 +30,22 @@ namespace WebAPIRestCore20
             var connection = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
 
-            services.AddMvc();
+            // Forma Horiginal
+            //services.AddMvc();
+
+            // Para poder voltar na requisição formato XML
+            services.AddMvc(options => 
+            {
+                options.RespectBrowserAcceptHeader = false;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml",MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            }).AddXmlSerializerFormatters();
+
+
+            //HATOAS
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new PessoaEnricher());
+            services.AddSingleton(filterOptions);
 
             services.AddApiVersioning();
 
@@ -70,7 +88,12 @@ namespace WebAPIRestCore20
             //app.UseRewriter(option);
             // Fim Swegger
 
-            app.UseMvc();
+            app.UseMvc(routes => {
+            routes.MapRoute(
+                    name: "DefaultApi",
+                    template:"{controller=values}/{id?}"
+                );
+            });
         }
     }
 }
