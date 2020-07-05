@@ -5,6 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 using WebAPIRestCore20.Data.VO;
 using Tapioca.HATEOAS;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPIRestCore20.Controllers
 {
@@ -21,6 +22,7 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpGet]
+        //[Authorize("Bearer")]
         //[SwaggerResponse((200), Type = typeof(List<Pessoa>))]
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
@@ -32,6 +34,7 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize("Bearer")]
         //[SwaggerResponse((200), Type = typeof(Pessoa))]
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
@@ -48,6 +51,7 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpPost]
+        [Authorize("Bearer")]
         //[SwaggerResponse((201), Type = typeof(Pessoa))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
@@ -62,6 +66,7 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpPut]
+        [Authorize("Bearer")]
         //[SwaggerResponse((202), Type = typeof(Pessoa))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]
@@ -76,6 +81,7 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("Bearer")]
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
         //[SwaggerResponse((401))]

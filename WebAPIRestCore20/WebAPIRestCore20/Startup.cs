@@ -12,43 +12,91 @@ using WebAPIRestCore20.Repository.Generic;
 using Microsoft.Net.Http.Headers;
 using Tapioca.HATEOAS;
 using WebAPIRestCore20.HyperMidia;
+using WebAPIRestCore20.Repository;
+using WebAPIRestCore20.Repository.Implementations;
+using WebAPIRestCore20.Security.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPIRestCore20
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region "Conexão connection"
             var connection = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
+            #endregion
+
+            #region "Autenticação"
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+
+            var tokenConfigurations = new TokenConfiguration();
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfigurations")
+                ).Configure(tokenConfigurations);
+            services.AddSingleton(tokenConfigurations);
+
+            services.AddAuthentication(authOptions => {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(bearerOptions => 
+            {
+                var paramValidation = bearerOptions.TokenValidationParameters;
+                paramValidation.IssuerSigningKey = signingConfigurations.Key;
+                paramValidation.ValidAudience = tokenConfigurations.Audiece;
+                paramValidation.ValidIssuer = tokenConfigurations.Issuer;
+
+                paramValidation.ValidateIssuerSigningKey = true;
+
+                paramValidation.ValidateLifetime = true;
+
+                paramValidation.ClockSkew = TimeSpan.Zero;
+            });
+
+            services.AddAuthorization(auth => 
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+            #endregion
 
             // Forma Horiginal
             //services.AddMvc();
 
-            // Para poder voltar na requisição formato XML
-            services.AddMvc(options => 
+            #region "XML e JASON"
+            // Para poder voltar na requisição formato XML ou Jason
+            services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = false;
-                options.FormatterMappings.SetMediaTypeMappingForFormat("xml",MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
                 options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
             }).AddXmlSerializerFormatters();
+            #endregion
 
-
+            #region "HATOAS"
             //HATOAS
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ObjectContentResponseEnricherList.Add(new PessoaEnricher());
             services.AddSingleton(filterOptions);
+            #endregion
 
             services.AddApiVersioning();
 
+            #region "Swagger"
             //Swagger
             //services.AddSwaggerGen(c => 
             //{
@@ -60,13 +108,21 @@ namespace WebAPIRestCore20
             //        });
             //});
             // Fim Swagger
+            #endregion
 
+            #region "Injeção de Dependencia"
             // Bussines
             services.AddScoped<IPessoaBusiness, PessoaBusinessImplem>();
             services.AddScoped<ILivrosBusiness, LivrosBusinessImplem>();
+            services.AddScoped<ILoginBusiness, LoginBusinessImplem>();
+            services.AddScoped<IUsuariosBusiness, UsuariosBusinessImplem>();
+
+            //Repsitory
+            services.AddScoped<ILoginRepository,LoginRepositoryImpl> ();
 
             //Repository Generico
             services.AddScoped(typeof(IRepository<>),typeof(GenericRepository<>));
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,11 +144,12 @@ namespace WebAPIRestCore20
             //app.UseRewriter(option);
             // Fim Swegger
 
-            app.UseMvc(routes => {
-            routes.MapRoute(
-                    name: "DefaultApi",
-                    template:"{controller=values}/{id?}"
-                );
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                        name: "DefaultApi",
+                        template: "{controller=values}/{id?}"
+                    );
             });
         }
     }
