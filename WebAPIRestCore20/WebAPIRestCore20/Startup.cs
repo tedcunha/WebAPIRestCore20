@@ -24,18 +24,18 @@ namespace WebAPIRestCore20
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             #region "Conexão connection"
-            var connection = Configuration["MySqlConnection:MySqlConnectionString"];
+            var connection = _configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
             #endregion
 
@@ -44,32 +44,40 @@ namespace WebAPIRestCore20
             services.AddSingleton(signingConfigurations);
 
             var tokenConfigurations = new TokenConfiguration();
+
             new ConfigureFromConfigurationOptions<TokenConfiguration>(
-                Configuration.GetSection("TokenConfigurations")
+                _configuration.GetSection("TokenConfigurations")
                 ).Configure(tokenConfigurations);
+
             services.AddSingleton(tokenConfigurations);
 
-            services.AddAuthentication(authOptions => {
+            services.AddAuthentication(authOptions =>
+            {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(bearerOptions => 
+            }).AddJwtBearer(bearerOptions =>
             {
-                var paramValidation = bearerOptions.TokenValidationParameters;
-                paramValidation.IssuerSigningKey = signingConfigurations.Key;
-                paramValidation.ValidAudience = tokenConfigurations.Audiece;
-                paramValidation.ValidIssuer = tokenConfigurations.Issuer;
+                var paramsValidation = bearerOptions.TokenValidationParameters;
+                paramsValidation.IssuerSigningKey = signingConfigurations.Key;
+                paramsValidation.ValidAudience = tokenConfigurations.Audience;
+                paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
 
-                paramValidation.ValidateIssuerSigningKey = true;
+                // Validates the signing of a received token
+                paramsValidation.ValidateIssuerSigningKey = true;
 
-                paramValidation.ValidateLifetime = true;
+                // Checks if a received token is still valid
+                paramsValidation.ValidateLifetime = true;
 
-                paramValidation.ClockSkew = TimeSpan.Zero;
+                // Tolerance time for the expiration of a token (used in case
+                // of time synchronization problems between different
+                // computers involved in the communication process)
+                paramsValidation.ClockSkew = TimeSpan.Zero;
             });
 
-            services.AddAuthorization(auth => 
+            services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
                     .RequireAuthenticatedUser().Build());
             });
             #endregion

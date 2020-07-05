@@ -23,7 +23,7 @@ namespace WebAPIRestCore20.Controllers
         [AllowAnonymous]
         [HttpPost]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public object Post([FromBody] Usuarios usuario)
+        public object Post([FromBody] LoginVO usuario)
         {
             if (usuario == null)
             {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using WebAPIRestCore20.Data.VO;
 using WebAPIRestCore20.Model;
 using WebAPIRestCore20.Repository;
 using WebAPIRestCore20.Security.Configuration;
@@ -27,7 +28,7 @@ namespace WebAPIRestCore20.Business.Implementations
             _tokenConfiguration = tokenConfiguration;
         }
 
-        public object FindByLogin(Usuarios usuario)
+        public object FindByLogin(LoginVO usuario)
         {
             bool credentialsIsValid = false;
             if (usuario != null && !String.IsNullOrWhiteSpace(usuario.Login))
@@ -42,19 +43,19 @@ namespace WebAPIRestCore20.Business.Implementations
                     ClaimsIdentity identity = new ClaimsIdentity(
                         new GenericIdentity(usuario.Login, "Login"),
                         new[] {
-                        new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName,usuario.Login)
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, usuario.Login)
                         });
 
                     DateTime createDate = DateTime.Now;
-                    DateTime expiraTionDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
+                    DateTime expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
 
                     // Criando o Token
                     var handler = new JwtSecurityTokenHandler();
-                    string token = CreateToken(identity, createDate, expiraTionDate, handler);
+                    string token = CreateToken(identity, createDate, expirationDate, handler);
                     // =============================
 
-                    return SucessObject(createDate, expiraTionDate, token);
+                    return SucessObject(createDate, expirationDate, token);
                 }
                 else
                 {
@@ -65,16 +66,16 @@ namespace WebAPIRestCore20.Business.Implementations
             return ExceptionObject();
         }
 
-        private string CreateToken(ClaimsIdentity identity, DateTime createDate, DateTime expiraTionDate, JwtSecurityTokenHandler handler)
+        private string CreateToken(ClaimsIdentity identity, DateTime createDate, DateTime expirationDate, JwtSecurityTokenHandler handler)
         {
             var securityToken = handler.CreateToken(new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
             {
                 Issuer = _tokenConfiguration.Issuer,
-                Audience = _tokenConfiguration.Audiece,
+                Audience = _tokenConfiguration.Audience,
                 SigningCredentials = _signingConfigurations.SigningCredentials,
                 Subject = identity,
                 NotBefore = createDate,
-                Expires = expiraTionDate
+                Expires = expirationDate
             });
 
             var token = handler.WriteToken(securityToken);

@@ -22,7 +22,7 @@ namespace WebAPIRestCore20.Controllers
         }
 
         [HttpGet]
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         //[SwaggerResponse((200), Type = typeof(List<Pessoa>))]
         //[SwaggerResponse((204))]
         //[SwaggerResponse((400))]
