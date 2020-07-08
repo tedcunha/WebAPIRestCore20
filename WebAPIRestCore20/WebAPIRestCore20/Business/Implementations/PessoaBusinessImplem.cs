@@ -13,10 +13,10 @@ namespace WebAPIRestCore20.Business.Implementations
 {
     public class PessoaBusinessImplem : IPessoaBusiness
     {
-        private readonly IRepository<Pessoa> _repository;
+        private readonly IPessoasRepository _repository;
 
         private readonly PessoaConverter _converter;
-        public PessoaBusinessImplem(IRepository<Pessoa> repository)
+        public PessoaBusinessImplem(IPessoasRepository repository)
         {
             _repository = repository;
             _converter = new PessoaConverter();
@@ -50,6 +50,11 @@ namespace WebAPIRestCore20.Business.Implementations
         public PessoaVO FindByID(long Id)
         {
             return _converter.Parse(_repository.FindByID(Id));
+        }
+
+        public List<PessoaVO> PesquisaPorNome(string firstname, string lastname)
+        {
+            return _converter.ParseList(_repository.PesquisaPorNome(firstname, lastname));
         }
 
         public PessoaVO Update(PessoaVO pessoa)

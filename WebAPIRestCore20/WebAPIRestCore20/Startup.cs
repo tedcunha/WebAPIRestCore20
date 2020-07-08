@@ -127,6 +127,8 @@ namespace WebAPIRestCore20
 
             //Repsitory
             services.AddScoped<ILoginRepository,LoginRepositoryImpl> ();
+            services.AddScoped<IPessoasRepository, PessoasRepositoryImpl> ();
+
 
             //Repository Generico
             services.AddScoped(typeof(IRepository<>),typeof(GenericRepository<>));

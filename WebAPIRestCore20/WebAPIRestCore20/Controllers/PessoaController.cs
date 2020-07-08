@@ -33,6 +33,20 @@ namespace WebAPIRestCore20.Controllers
             return Ok(_pessoaBusiness.FindAll());
         }
 
+        [HttpGet("PesquisaPorNome")]
+        [Authorize("Bearer")]
+        //PAra retornar uma lista de Paginação
+        //[SwaggerResponse((200), Type = typeof(List<Pessoa>))]
+        //[SwaggerResponse((204))]
+        //[SwaggerResponse((400))]
+        //[SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult PesquisaPorNome([FromQuery] string firstname,[FromQuery] string lastname)
+        {
+            return Ok(_pessoaBusiness.PesquisaPorNome(firstname, lastname));
+        }
+
+
         [HttpGet("{id}")]
         [Authorize("Bearer")]
         //[SwaggerResponse((200), Type = typeof(Pessoa))]

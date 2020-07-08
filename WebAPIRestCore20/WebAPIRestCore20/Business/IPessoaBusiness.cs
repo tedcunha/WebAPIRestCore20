@@ -12,6 +12,7 @@ namespace WebAPIRestCore20.Business
         PessoaVO Create(PessoaVO pessoa);
         PessoaVO FindByID(long Id);
         List<PessoaVO> FindAll();
+        List<PessoaVO> PesquisaPorNome(string firstname, string lastname);
         PessoaVO Update(PessoaVO pessoa);
         void Delete(long Id);
     }

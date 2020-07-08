@@ -10,7 +10,7 @@ namespace WebAPIRestCore20.Repository.Generic
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly MySqlContext _mySqlContext;
+        protected readonly MySqlContext _mySqlContext;
         private DbSet<T> dataset;
 
         public GenericRepository(MySqlContext mySqlContext)
