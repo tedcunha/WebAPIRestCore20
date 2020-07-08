@@ -46,6 +46,16 @@ namespace WebAPIRestCore20.Controllers
             return Ok(_pessoaBusiness.PesquisaPorNome(firstname, lastname));
         }
 
+        [HttpGet("PesquisaPeginada/{sortDirection}/{pageSize}/{page}")]
+        //[SwaggerResponse((200), Type = typeof(Pessoa))]
+        //[SwaggerResponse((204))]
+        //[SwaggerResponse((400))]
+        //[SwaggerResponse((401))]
+        [Authorize("Bearer")]
+        public IActionResult PesquisaPeginada([FromQuery] string name, string sortDirection, int pageSize, int page)
+        {
+            return new ObjectResult(_pessoaBusiness.FindWithPagedSearch(name,sortDirection,pageSize,page));
+        }
 
         [HttpGet("{id}")]
         [Authorize("Bearer")]

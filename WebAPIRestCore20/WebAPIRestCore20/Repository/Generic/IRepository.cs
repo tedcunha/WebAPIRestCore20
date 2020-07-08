@@ -14,5 +14,7 @@ namespace WebAPIRestCore20.Repository.Generic
         T Update(T item);
         void Delete(long Id);
         bool Exist(long? id);
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }
